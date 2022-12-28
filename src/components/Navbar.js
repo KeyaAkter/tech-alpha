@@ -11,13 +11,13 @@ const Navbar = () => {
           </span>
         </div>
         <div className="nav-right flex items-center gap-5">
-          <NavLink className="nav-link" end to="/">
+          <NavLink end to="/" className="nav-link">
             Home
           </NavLink>
           <NavLink className="nav-link" to="/products">
             Products
           </NavLink>
-          <Link end to="/cart">
+          <Link to="/cart">
             <span className="cart-icon relative">
               <BsCart3 />
               <span className="cart-counter absolute -top-3 -right-3 text-xs h-5 w-5 rounded-full bg-orange-600 flex items-center justify-center font-medium">
