@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className="navbar-wrapper  bg-violet-700 text-violet-50 h-20 flex justify-center items-center">
       <div className="navbar container mx-auto flex items-center justify-between">
         <div className="nav-left">
-          <span className="logo text-xl font-semibold">
+          <span className="nav-logo text-xl font-semibold">
             tech<span className="text-orange-500">Alpha</span>
           </span>
         </div>
@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link to="/cart">
             <span className="cart-icon relative">
               <BsCart3 />
-              <span className="cart-counter absolute -top-3 -right-3 text-xs h-5 w-5 rounded-full bg-orange-600 flex items-center justify-center font-medium">
+              <span className="cart-counter absolute z-[1] -top-3 -right-3 text-xs h-5 w-5 rounded-full bg-orange-600 flex items-center justify-center font-medium">
                 10
               </span>
             </span>
