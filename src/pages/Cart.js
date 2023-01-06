@@ -1,16 +1,20 @@
-import { formatCurrency } from "../utilities/currencyFormatter";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
   clearCart,
   decreaseCart,
+  getSubtotal,
   removeFromCart,
 } from "../features/products/cartSlice";
-import { Link } from "react-router-dom";
+import { formatCurrency } from "../utilities/currencyFormatter";
 
 const Cart = () => {
-  const { cartItems: data } = useSelector((state) => state.cart);
+  const { cartItems: data, cartTotalAmount: subtotal } = useSelector(
+    (state) => state.cart
+  );
 
   const dispatch = useDispatch();
 
@@ -26,19 +30,28 @@ const Cart = () => {
     dispatch(addToCart(product));
   };
 
+  useEffect(() => {
+    dispatch(getSubtotal());
+  }, [data, dispatch]);
+
   return (
     <div className="cart-section container mx-auto py-10">
       <h2 className="cart-headline uppercase text-2xl font-bold space-font text-center mb-10">
-        {data.length > 0 ? "Your Cart" : "Your cart is empty"}
+        {data.length > 0
+          ? `You've added ${data.length} item${data.length > 1 ? "s" : ""}`
+          : "Your cart is empty"}
       </h2>
 
       <div className="start-shopping-btn text-center">
         {data.length === 0 && (
           <Link
             to="/products"
-            className="text-sky-500 cursor-pointer inline-block"
+            className="flex items-center justify-center text-sky-500 cursor-pointer text-lg gap-2 group"
           >
-            Start Shopping Now
+            <span>
+              <BsArrowLeft className="group-hover:-translate-x-2 duration-300" />
+            </span>
+            <span>Start Shopping</span>
           </Link>
         )}
       </div>
@@ -50,11 +63,14 @@ const Cart = () => {
               <div className="product-column col-span-2">Product</div>
               <div className="unit-price-column">Unit Price</div>
               <div className="counter-column">Quantity</div>
-              <div className="total-price-column">Total Price</div>
+              <div className="total-price-column ml-auto">Total Price</div>
             </div>
             <div className="cart-products flex flex-col">
               {data?.map((product) => (
-                <div className="product grid grid-cols-5 gap-10 mt-10 border-b pb-5">
+                <div
+                  key={product.id}
+                  className="product grid grid-cols-5 gap-10 mt-10 border-b pb-5"
+                >
                   <div className="product-cart-left flex col-span-2 gap-5">
                     <img
                       className="h-32 w-32 object-cover"
@@ -92,7 +108,7 @@ const Cart = () => {
                     </button>
                   </div>
                   <div className="total-price ml-auto">
-                    {formatCurrency(product.price)}
+                    {formatCurrency(product.price * product.cartQuantity)}
                   </div>
                 </div>
               ))}
@@ -108,7 +124,9 @@ const Cart = () => {
             <div className="subtotal-section flex flex-col items-start gap-2">
               <div className="subtotal-btn flex justify-between w-full text-2xl font-medium">
                 <span className="text-sky-500">Subtotal</span>
-                <span className="text-rose-500">$200</span>
+                <span className="text-rose-500">
+                  {formatCurrency(subtotal)}
+                </span>
               </div>
               <p className="text-gray-400">
                 {" "}
@@ -116,13 +134,13 @@ const Cart = () => {
               </p>
               <Link
                 to="/"
-                className="checkout-btn bg-sky-500 w-full py-3 uppercase font-medium text-sky-50 tracking-widest hover:bg-sky-600 duration-300"
+                className="checkout-btn bg-sky-500 w-full py-3 uppercase font-medium text-sky-50 tracking-widest text-center hover:bg-sky-600 duration-300"
               >
                 Checkout
               </Link>
               <Link
                 to="/products"
-                className="continue uppercase text-sky-500 font-medium flex gap-1 items-center group"
+                className="continue uppercase text-sky-500 font-medium flex gap-2 items-center group"
               >
                 <span>
                   <BsArrowLeft className="group-hover:-translate-x-2 duration-300" />
