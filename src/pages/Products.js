@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Card from "../components/Card";
 
 const Products = () => {
-  const { items: data, status } = useSelector((state) => state.products); // hook from react-redux
+  const { items: data, status } = useSelector((state) => state.products);
 
   return (
     <div className="products-section container mx-auto py-10">

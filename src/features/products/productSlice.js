@@ -3,8 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  items: [], // for storing many products
-  status: null, // pending, successful, rejection
+  items: [],
+  status: null,
 };
 
 export const productsFetching = createAsyncThunk(

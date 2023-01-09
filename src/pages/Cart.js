@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { BsArrowLeft } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { BsArrowLeft } from "react-icons/bs";
 import {
   addToCart,
   clearCart,
@@ -59,10 +59,10 @@ const Cart = () => {
       {data.length > 0 && (
         <>
           <div className="cart-container ">
-            <div className="product-captions grid grid-cols-5 gap-10 border-b pb-3 uppercase font-medium">
+            <div className="products-headline grid grid-cols-5 gap-10 border-b pb-3 uppercase font-medium">
               <div className="product-column col-span-2">Product</div>
               <div className="unit-price-column">Unit Price</div>
-              <div className="counter-column">Quantity</div>
+              <div className="quantity-column">Quantity</div>
               <div className="total-price-column ml-auto">Total Price</div>
             </div>
             <div className="cart-products flex flex-col">
