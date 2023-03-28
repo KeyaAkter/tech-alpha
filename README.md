@@ -41,4 +41,4 @@ Tech Alpha is a great starting point for anyone looking to build an e-commerce p
 
 ## Note
 
-This project is pnly a front-end implementation, therefore, data persistance and payment transaction are not supported.
+This project is only a front-end implementation, therefore, data persistance and payment transaction are not supported.
